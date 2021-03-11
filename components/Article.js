@@ -1,6 +1,7 @@
 // This is the data we will be using to create our articles. Look at it, then proceed to line 93.
 // OPTIONAL: if you're feeling adventurous, try to make this data an export from a different module, and import it here.
 // You can read about ES6 modules here: https://exploringjs.com/es6/ch_modules.html#sec_basics-of-es6-modules
+
 const data = [
   {
     title: 'Lambda School Students: "We\'re the best!"',
@@ -88,12 +89,60 @@ const data = [
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
   }
 ];
+const newData = {title: "Mitch is Sexy", date: "Now", firstParagraph:"Mitch is very sexy", secondParagraph: "like really, reaaly sexy", thirdParagraph: "Like I'm drop dead gorgeous sexy!"}
+data.push(newData)
+
+ function articleMaker (obj) {
+
+  const article = document.createElement('div')
+  const title = document.createElement('h2')
+  const date = document.createElement('p')
+  const exbutton = document.createElement('span')
+  const puno = document.createElement('p')
+  const pdos = document.createElement('p')
+  const ptres = document.createElement('p')
+
+  article.appendChild(title)
+  article.appendChild(date)
+  article.appendChild(exbutton)
+  article.appendChild(puno)
+  article.appendChild(pdos)
+  article.appendChild(ptres)
+
+  article.classList.add('article')
+  date.classList.add('date')
+  exbutton.classList.add('expandButton')
+  exbutton.textContent = "+"
+
+  title.textContent = obj.title
+  date.textContent = obj.date
+  puno.textContent = obj.firstParagraph
+  pdos.textContent = obj.secondParagraph
+  ptres.textContent = obj.thirdParagraph
+  
+
+  exbutton.addEventListener('click', () =>{
+    article.classList.toggle('article-open')
+  })
+  return article
+ }
+
+const articles = document.querySelector('.articles')
+
+ data.forEach((dataObj) =>{
+  const newArticle = articleMaker(dataObj)
+
+  articles.appendChild(newArticle)
+
+ })
+
+articleMaker(data);
 
 /*
   Step 1: Write a component called 'articleMaker' to create an article.
   Your component is a function that takes an article object as its only argument,
   and returns a DOM node looking like the one below:
-
+ 
   <div class="article">
     <h2>{title of the article}</h2>
     <p class="date">{date of the article}</p>
@@ -114,3 +163,4 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
